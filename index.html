@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emergency Service App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f2f2f2;
+      text-align: center;
+    }
+    header {
+      background: black;
+      color: white;
+      padding: 15px;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    section {
+      display: none;
+      padding: 40px;
+    }
+    .active {
+      display: block;
+    }
+    .btn {
+      background: blue;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input {
+      width: 80%;
+      padding: 8px;
+      margin: 5px 0;
+    }
+    .form-box {
+      background: white;
+      max-width: 350px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .emergency-btn {
+      display: block;
+      background: skyblue;
+      color: black;
+      border: none;
+      width: 200px;
+      padding: 15px;
+      margin: 10px auto;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .emergency-btn:hover {
+      background: lightblue;
+    }
+    .nav-logout {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Emergency Service App</h1>
+    <nav>
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('login')">Login</a>
+      <a onclick="showPage('register')">Register</a>
+      <a onclick="showPage('emergency')">Emergency</a>
+      <a class="nav-logout" id="logoutLink" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <section id="home" class="active">
+    <h2>Welcome to EmergencyQuicklyAccess</h2>
+    <p>Get help anytime, anywhere — Your emergency, our priority.</p>
+    <button class="btn" onclick="showPage('login')">Get Started</button>
+  </section>
+
+  <section id="login">
+    <div class="form-box">
+      <h2>Login</h2>
+      <input type="text" placeholder="Username" required><br>
+      <input type="password" placeholder="Password" required><br>
+      <button class="btn" onclick="alert('Login successful (demo)!'); showPage('emergency'); toggleLogout(true);">Login</button>
+      <p>Don't have an account? <a href="#" onclick="showPage('register')">Register</a></p>
+      <p><a href="#" onclick="showPage('recovery')">Forgot password?</a></p>
+    </div>
+  </section>
+
+  <section id="register">
+    <div class="form-box">
+      <h2>Register</h2>
+      <input type="text" placeholder="Full Name" required><br>
+      <input type="email" placeholder="Email" required><br>
+      <input type="password" placeholder="Password" required><br>
+      <button class="btn" onclick="alert('Registration successful (demo)!'); showPage('login');">Register</button>
+      <p>Already have an account? <a href="#" onclick="showPage('login')">Login</a></p>
+    </div>
+  </section>
+
+  <section id="recovery">
+    <div class="form-box">
+      <h2>Password Recovery</h2>
+      <p>Enter your email to reset your password:</p>
+      <input type="email" placeholder="Enter your email" required><br>
+      <button class="btn" onclick="alert('Recovery email sent (demo)!'); showPage('login');">Send Reset Link</button>
+      <p><a href="#" onclick="showPage('login')">Back to Login</a></p>
+    </div>
+  </section>
+
+  <section id="emergency">
+    <h2>Emergency Access</h2>
+    <p>Select the service you need right now: That help you in an emergency</p>
+    <button class="emergency-btn" onclick="alert('Calling Police... 🚓')">Call Police</button>
+    <button class="emergency-btn" onclick="alert('Calling Ambulance... 🚑')">Call Ambulance</button>
+    <button class="emergency-btn" onclick="alert('Calling Fire Department... 🚒')">Call Fire Department</button>
+    <br>
+    <button class="btn" onclick="showPage('home')">Back to Home</button>
+  </section>
+
+  <script>
+    function showPage(page) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.getElementById(page).classList.add('active');
+      toggleLogout(page === 'emergency');
+    }
+
+    function toggleLogout(show) {
+      const logoutLink = document.getElementById('logoutLink');
+      logoutLink.style.display = show ? 'inline' : 'none';
+    }
+
+    function logout() {
+      alert("Logged out (demo)!");
+      showPage('home');
+      toggleLogout(false);
+    }
+  </script>
+</body>
+</html>
